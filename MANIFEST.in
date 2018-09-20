@@ -1,0 +1,2 @@
+include versioneer.py
+include GCode/_version.py
