@@ -1,4 +1,0 @@
-[submodule "test_results"]
-	path = test_results
-	url = https://github.com/jed-frey/python_GCode.git
-	branch = gh-pages
