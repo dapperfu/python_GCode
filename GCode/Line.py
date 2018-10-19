@@ -4,7 +4,7 @@ import numpy as np
 from .GCode import GCode
 
 a = 10  # [mm]. Shorest leg of the triangle will be 10 mm, 1 cm, 0.01 m long.
-default_feed = 300  # mm/n
+default_feed = 240  # mm/min. 4 mm/s.
 default_power = 150  # [dimensionless]
 
 
@@ -41,42 +41,23 @@ Let:
 
 - a: Shortest Side. Opposite 30$^o$ ($\frac{\pi}{6}$)
 """
-default_points = np.array(
-    [
-        [0, 0],  # Start at origin.
-        [a * np.sqrt(3), 0],  # Draw long side along X axis.
-        [a * np.sqrt(3), a],  # Draw the short side parallel to Y axis.
-        [0, 0],  # Return to origin. Draw hypotenuse.
-    ]
-)
+default_points = np.array([[0, 0], [a * np.sqrt(3), 0], [a * np.sqrt(3), a], [0, 0]])  # Start at origin.  # Draw long side along X axis.  # Draw the short side parallel to Y axis.  # Return to origin. Draw hypotenuse.
+
 
 def HorzLine(X0=0, Xf=10, Y=0, n_points=2):
     p = np.linspace(X0, Xf, n_points, endpoint=True)
-    line_points = np.array([
-        p,
-        Y*np.ones(p.shape),
-    ])
+    line_points = np.array([p, Y * np.ones(p.shape)])
     return line_points.transpose()
+
 
 def VertLine(X=0, Y0=0, Yf=10, n_points=2):
     p = np.linspace(Y0, Yf, n_points, endpoint=True)
-    line_points = np.array([
-        X*np.ones(p.shape),
-        p,
-    ])
+    line_points = np.array([X * np.ones(p.shape), p])
     return line_points.transpose()
 
 
 class Line(GCode):
-    def __init__(
-        self,
-        points=default_points,
-        feed=default_feed,
-        power=default_power,
-        dynamic_power=True,
-        *args,
-        **kwargs,
-    ):
+    def __init__(self, points=default_points, feed=default_feed, power=default_power, dynamic_power=True, *args, **kwargs):
         self.points = points.squeeze()
         self.feed = feed
         self.power = power
@@ -85,10 +66,10 @@ class Line(GCode):
         super().__init__(*args, **kwargs)
 
         self.generate_gcode()
-        
+
     def reverse(self):
         flip_n_reverseit = np.eye(self.points.shape[0])[:, ::-1]
-        self.points=np.matmul(flip_n_reverseit, self.points)
+        self.points = np.matmul(flip_n_reverseit, self.points)
 
     @property
     def X(self):
@@ -115,9 +96,7 @@ class Line(GCode):
         return self.points[-1, 1]
 
     def __repr__(self):
-        return "Line<len={}mm, feed={}, power={}>".format(
-            self.dist, self.feed, self.power
-        )
+        return "Line<len={}mm, feed={}, power={}>".format(self.dist, self.feed, self.power)
 
     @property
     def dists(self):
@@ -148,14 +127,16 @@ class Line(GCode):
     def time(self):
         """ Total distance traveled. """
         return np.round(np.sum(self.times), 5)
-    
+
     def set_power(self, power):
         self.power = power
+
     def set_points(self, points):
         self.points = points
+
     def set_feed(self, feed):
         self.feed = feed
-    
+ 
     def generate_gcode(self):
         self.buffer = list()
         # Move to start of the line.
@@ -166,12 +147,13 @@ class Line(GCode):
             self.M4(S=self.power)
         else:
             self.M3(S=self.power)
-            
+
         # For remaining points.
         for row_idx in range(1, self.points.shape[0]):
-            self.G1(
-                X=self.points[row_idx, 0],
-                Y=self.points[row_idx, 1],
-                F=self.feed,
-            )
+            self.G1(X=self.points[row_idx, 0], Y=self.points[row_idx, 1], F=self.feed)
         self.M5()
+        
+    @property
+    def g(self):
+        self.generate_gcode()
+        return "\n".join(self.buffer)

@@ -4,9 +4,8 @@ import numpy as np
 
 from .. import Line
 
-
-class Circle(Line):
-    def __init__(self, center=(0, 0), radius=10, clockwise=True, *args, **kwargs):
+class Cross(Line):
+    def __init__(self, len_side=10, origin=np.array([0, 0]), rotation=0, *args, **kwargs):
         self.len_side = len_side
         self.origin = origin
 

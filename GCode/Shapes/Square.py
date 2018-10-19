@@ -6,9 +6,7 @@ from .. import Line
 
 
 class Square(Line):
-    def __init__(
-        self, len_side=10, origin=np.array([0, 0]), rotation=0, *args, **kwargs
-    ):
+    def __init__(self, len_side=10, origin=np.array([0, 0]), rotation=0, *args, **kwargs):
         self.len_side = len_side
         self.origin = origin
 
@@ -18,18 +16,7 @@ class Square(Line):
 
     @property
     def _points(self):
-        return np.array(
-            [
-                [self.origin[0], self.origin[1]],
-                [self.origin[0] + self.len_side, self.origin[1]],
-                [
-                    self.origin[0] + self.len_side,
-                    self.origin[1] + self.len_side,
-                ],
-                [self.origin[0], self.origin[1] + self.len_side],
-                [self.origin[0], self.origin[1]],
-            ]
-        )
+        return np.array([[self.origin[0], self.origin[1]], [self.origin[0] + self.len_side, self.origin[1]], [self.origin[0] + self.len_side, self.origin[1] + self.len_side], [self.origin[0], self.origin[1] + self.len_side], [self.origin[0], self.origin[1]]])
 
     def generate_gcode(self):
         self.points = self._points
