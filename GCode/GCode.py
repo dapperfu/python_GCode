@@ -5,6 +5,9 @@ import numpy as np
 
 
 class GCode(object):
+    """Generate a GCode 
+
+    """
     NEWLINE = "\n"
 
     def __init__(self, file=None, machine=None, buffer=None):
