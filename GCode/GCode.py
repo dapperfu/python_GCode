@@ -5,7 +5,7 @@ import numpy as np
 
 
 class GCode(object):
-    """Generate a GCode 
+    """Create a GCode program instance.
 
     """
     NEWLINE = "\n"
