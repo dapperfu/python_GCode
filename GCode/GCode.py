@@ -39,7 +39,8 @@ class GCode(object):
         filename : str
             Filename of file to load.
         """
-
+        if os.path.exists(filename) and not overwrite:
+            raise Exception("File exists and not overwriting.")
         with open(filename, "w") as fid:
             print(str(self), file=fid)
 
