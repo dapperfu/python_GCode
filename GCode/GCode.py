@@ -19,6 +19,12 @@ class GCode(object):
             self.buffer = buffer        
     
     def load(self, filename):
+        """Load GCode from  file.
+        
+        Parameters
+        ==========
+        filename : str        
+        """
         with open(filename, "r") as fid:
             data = fid.read()
         self.buffer = data.splitlines()
