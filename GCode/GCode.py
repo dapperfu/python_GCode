@@ -76,7 +76,7 @@ numeric_types = (int, float, np.int8, np.int16, np.int32, np.int64, np.float, np
 
 
 def cmd_factory(cmd, doc=None):
-    """ Factory to create GCode Command Functions. """
+    """Factory to create GCode Command Functions. """
 
     def cmd_fcn(self, **kwargs):
         args = list()
