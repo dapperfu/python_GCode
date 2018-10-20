@@ -19,7 +19,7 @@ class GCode(object):
             self.buffer = buffer        
     
     def load(self, filename):
-        """Load GCode from  file.
+        """Load GCode from file.
         
         Parameters
         ==========
@@ -31,7 +31,15 @@ class GCode(object):
             data = fid.read()
         self.buffer = data.splitlines()
 
-    def save(self, filename):
+    def save(self, filename, overwrite=False):
+        """Save GCode program to a file.
+        
+        Parameters
+        ==========
+        filename : str
+            Filename of file to load.
+        """
+
         with open(filename, "w") as fid:
             print(str(self), file=fid)
 
