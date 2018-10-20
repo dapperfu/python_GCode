@@ -23,8 +23,10 @@ class GCode(object):
         
         Parameters
         ==========
-        filename : str        
+        filename : str
+            Filename of file to load.
         """
+        assert(os.path.exists(filename))
         with open(filename, "r") as fid:
             data = fid.read()
         self.buffer = data.splitlines()
