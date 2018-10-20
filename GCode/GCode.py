@@ -65,7 +65,7 @@ class GCode(object):
         """ run the program on the given machine """
         if self.machine is None:
             raise Exception("No machine to run on")
-        self.machine.run(self)
+        return self.machine.run(self)
 
     def optimise(self):
         """ Create the best GCode possible. """
@@ -76,7 +76,8 @@ numeric_types = (int, float, np.int8, np.int16, np.int32, np.int64, np.float, np
 
 
 def cmd_factory(cmd, doc=None):
-    """Factory to create GCode Command Functions."""
+    """Factory to create GCode Command Functions.
+    """
 
     def cmd_fcn(self, **kwargs):
         args = list()
