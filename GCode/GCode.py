@@ -10,8 +10,9 @@ class GCode(object):
     """
     NEWLINE = "\n"
 
-    def __init__(self, file=None, machine=None, buffer=None):
+    def __init__(self, machine=None, file=None, buffer=None):
         self.machine = machine
+
         if file is not None:
             self.load(file)
 
@@ -71,7 +72,7 @@ class GCode(object):
         raise (NotImplementedError("TODO:"))
 
 
-numeric_types = (int, np.int8, np.int16, np.int32, np.int64, np.float, np.float16, np.float32, np.float64, np.float128)
+numeric_types = (int, float, np.int8, np.int16, np.int32, np.int64, np.float, np.float16, np.float32, np.float64, np.float128)
 
 
 def cmd_factory(cmd, doc=None):
