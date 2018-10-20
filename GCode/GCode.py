@@ -9,20 +9,15 @@ class GCode(object):
 
     """
 
-    def __init__(self, machine=None, file=None, buffer=None):
+    def __init__(self, machine=None, filename=None, buffer=None):
         self.machine = machine
         if buffer is None:
             self.buffer = list()
-        elif file is not None:
+        elif filename is not None:
             self.load(file)
         else:
             self.buffer = buffer        
-        
-
-    @property
-    def code(self):
-        return "\n".join(self.buffer)
-
+    
     def load(self, filename):
         with open(filename, "r") as fid:
             data = fid.read()
