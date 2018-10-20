@@ -72,7 +72,7 @@ class GCode(object):
         raise (NotImplementedError("TODO:"))
 
 
-numeric_types = (int, float, np.int8, np.int16, np.int32, np.int64, np.float, np.float16, np.float32, np.float64, np.float128)
+numeric_types = (int, float, np.uint8, np.uint16, np.uint32, np.uint64,  np.int8, np.int16, np.int32, np.int64, np.float, np.float16, np.float32, np.float64, np.float128)
 
 
 def cmd_factory(cmd, doc=None):
