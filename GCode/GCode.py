@@ -11,14 +11,13 @@ class GCode(object):
 
     def __init__(self, machine=None, file=None, buffer=None):
         self.machine = machine
-
-        if file is not None:
-            self.load(file)
-
         if buffer is None:
             self.buffer = list()
+        elif file is not None:
+            self.load(file)
         else:
-            self.buffer = buffer
+            self.buffer = buffer        
+        
 
     @property
     def code(self):
