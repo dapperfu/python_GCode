@@ -52,6 +52,7 @@ class GCode(object):
         return "<GCode>[cmds={}]".format(len(self.buffer))
 
     def _repr_html_(self):
+        """Make it look pretty in Jupyter Notebooks."""
         html = list()
         for cmd_line in self.buffer:
             cmd, *args = cmd_line.split(" ")
@@ -60,6 +61,7 @@ class GCode(object):
         return "<br>\n".join(html)
 
     def __add__(self, other):
+        """Add two GCode programs together."""
         buffer = self.buffer
         buffer2 = other.buffer
 
