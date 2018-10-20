@@ -45,6 +45,7 @@ class GCode(object):
             print(str(self), file=fid)
 
     def __str__(self):
+        """str representation of GCode."""
         return self.code
 
     def __repr__(self):
