@@ -58,8 +58,8 @@ class GCode(object):
 
     def __iter__(self):
         """ __iter__ function """
-        for i in range(len(self.buffer)):
-            yield (self.buffer[i])
+        for buffer_line in self.buffer:
+            yield (buffer_line)
 
     def run(self):
         """ run the program on the given machine """
