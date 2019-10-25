@@ -60,9 +60,9 @@ class GCode:
         """
         with open(filename, "w") as fid:
             if self.name is not None:
-                print(f"; Program Name: {self.name}")
-            print(f"; Program UUID: {uuid.uuid4()}")
-            print(f"; Save Date: {datetime.datetime.utcnow().isoformat()}")
+                print(f"; Program Name: {self.name}", file=fid)
+            print(f"; Program UUID: {uuid.uuid4()}", file=fid)
+            print(f"; Save Date: {datetime.datetime.utcnow().isoformat()}", file=fid)
             print(str(self), file=fid)
 
     def __str__(self):
@@ -104,7 +104,7 @@ class GCode:
             buffer2 = other.buffer
         else:
             raise Exception(f"{type(other)}:\n{other}")
-        return self.buffer.extend(buffer2)
+        return GCode(machine=self.machine, buffer=self.buffer + buffer2)
 
     def __iter__(self):
         """ __iter__ function """
