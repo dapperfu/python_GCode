@@ -1,10 +1,18 @@
-# Config
-VENV:=/tmp/python_GCode_venv
+VENV:=/tmp/venv/gcode
+BIN=${VENV}/bin
+PYTHON=${BIN}/python3
+PIP=${BIN}/pip
 
-# Environments to setup for this project
-# Available options: python arduino
-ENVS:=python git
+${PYTHON}:
+	python3 -mvenv ${VENV}
+	${PIP} install --upgrade wheel setuptools pip
+	${PIP} install -r requirements.txt
+	${PIP} install -r requirements_test.txt
 
-## make_sandwich includes
-# https://github.com/jed-frey/make_sandwich
-include .mk_inc/env.mk
+.PHONY: clean
+clean:
+	rm -rf ${VENV}
+
+.PHONY: watch
+watch:
+	watcher -cmd "pre-commit run --all-files" -startcmd -keepalive -interval "2s" gcode/*.py tests/*.py

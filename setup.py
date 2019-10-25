@@ -29,7 +29,7 @@ test_requirements = read_requirements(path="requirements_test.txt")
 setuptools.setup(
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
-    name="GCode",
+    name="gcode",
     description="GCode",
     author="Jed",
     license="BSD",

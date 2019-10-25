@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-
 import numpy as np
 
 from .GCode import GCode
@@ -26,12 +24,11 @@ class Program(GCode):
         self.G0(F=self.feed)
         self.G1(F=self.feed)
         self.M3(S=1)  # Set laser power so that movement can be seen, but does nothing.
-        self.G92(X=0, Y=0, Z=0)  # I wasn't joking.
+        self.G92(X=0, Y=0, Z=0)
 
     def teardown(self):
         self.M5()  # Power down laser.
         self.G28()  # Move home.
-        # pushover("Laser is done.")
 
     def generate_gcode(self):
         self.setup()
@@ -84,4 +81,6 @@ class Program(GCode):
         return self.jog_time + self.laserin_time
 
     def __repr__(self):
-        return "Program<lines={}, dist={:.2f}mm, t={:.2f}s>".format(len(self.lines), self.dist, self.time)
+        return "Program<lines={}, dist={:.2f}mm, t={:.2f}s>".format(
+            len(self.lines), self.dist, self.time
+        )
