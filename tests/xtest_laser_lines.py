@@ -29,7 +29,7 @@ def cnc(request):
 
 
 def init(**kwargs):
-    prog = gcode.GCode(**kwarg)
+    prog = gcode.GCode(**kwargs)
     prog.G21()
     prog.G90()
     prog.G92(X=0, Y=0)

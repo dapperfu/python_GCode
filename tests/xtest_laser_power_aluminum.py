@@ -29,12 +29,12 @@ def cnc(request):
 
 
 def test_aluminum_laser_power(cnc):
-    for power in [100, 150, 200, 255]:
-        for row, feed in enumerate([15, 30, 60, 120, 180, 240, 300]):
-            row_y = row*5 # Every 5 mm.
-            cnc.cmd("G90")
-            cnc.cmd(f"G0X0Y{row_y}")
-            cnc.run(prog)
-                prog = gcode.Line(power=power, feed=feed, machine=cnc)
-                cnc.cmd("G91")
-                cnc.run(prog)
+	for row,power in enumerate([100, 150, 200, 255]):
+		row_y = row*5 # Every 5 mm.
+		cnc.cmd("G90")
+		cnc.cmd(f"G0X0Y{row_y}")
+		for _, feed in enumerate([15, 30, 60, 120, 180, 240, 300]):
+			prog = gcode.Line(power=power, feed=feed, machine=cnc)
+			cnc.cmd("G91")
+			cnc.run(prog)
+			cnc.cmd("M5")
