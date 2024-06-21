@@ -124,11 +124,11 @@ class GCode:
 
 numeric_types = (
     int,
+    float,
     np.int8,
     np.int16,
     np.int32,
     np.int64,
-    np.float,
     np.float16,
     np.float32,
     np.float64,
@@ -148,7 +148,7 @@ def cmd_factory(cmd, doc=None):
             # If the value is a known numeric type
             if isinstance(value, numeric_types):
                 # Cast to a float
-                value = np.float(value)
+                value = float(value)
                 # Round the value
                 value = np.round(value, decimals=4)
             # Add the args to the command line.
