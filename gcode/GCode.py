@@ -73,17 +73,6 @@ class GCode:
             getattr(self, "generate_gcode")()
         return "<GCode>[cmds={}]".format(len(self.buffer))
 
-    def _repr_html_(self):
-        if hasattr(self, "generate_gcode"):
-            getattr(self, "generate_gcode")()
-        html = list()
-        for cmd_line in self.buffer:
-            html_line = ""
-            for match in re.compile(r"([\w])([\d.]+)").findall(str(cmd_line)):
-                html_line += f"<b>{match[0]}</b>{match[1]}"
-            html.append(html_line)
-        return "<br>\n".join(html)
-
     def __add__(self, other):
         """Add GCode programs to:
         - Other GCode programs
@@ -116,11 +105,6 @@ class GCode:
         if self.machine is None:
             raise Exception("No machine to run on")
         self.machine.run(self)
-
-    def optimise(self):
-        """ Create the best GCode possible. """
-        raise (NotImplementedError("TODO:"))
-
 
 numeric_types = (
     int,
