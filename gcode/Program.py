@@ -5,7 +5,7 @@ from .GCode import GCode
 
 
 class Program(GCode):
-    """ A GCode Program Object """
+    """A GCode Program Object"""
 
     def __init__(self, lines=list(), feed=120, *args, **kwargs):
         self.lines = lines
@@ -56,19 +56,19 @@ class Program(GCode):
 
     @property
     def jog_time(self):
-        """ Return time spent jogging """
+        """Return time spent jogging"""
         jog_rate = self.feed / 60  # [mm/s]
         return self.jog_dist / jog_rate  # [s]
 
     @property
     def laserin_dist(self):
-        """ Distance, in mm, the line spends cutting. """
+        """Distance, in mm, the line spends cutting."""
         laserin = [line.dist for line in self.lines]
         return np.cumsum(laserin)[-1]
 
     @property
     def laserin_time(self):
-        """ Duration, in s, the line spends cutting. """
+        """Duration, in s, the line spends cutting."""
         laserin = [line.time for line in self.lines]
         return np.sum(laserin)
 

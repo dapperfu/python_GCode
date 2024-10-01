@@ -14,7 +14,6 @@ class GCode:
     def __init__(
         self,
         file: str = None,
-        machine=None,
         name: str = None,
         buffer: List[str] = list(),
     ):
@@ -23,8 +22,6 @@ class GCode:
             self.load(file)
         # Extend the existing buffer with the given buffer.
         self.buffer.extend(buffer)
-        # Set the machine.
-        self.machine = machine
         # Program Name
         self.name = name
 
@@ -55,9 +52,7 @@ class GCode:
             self.buffer.append(line)
 
     def save(self, filename):
-        """ Save the
-
-        """
+        """Save the"""
         with open(filename, "w") as fid:
             if self.name is not None:
                 print(f"; Program Name: {self.name}", file=fid)
@@ -96,15 +91,10 @@ class GCode:
         return GCode(machine=self.machine, buffer=self.buffer + buffer2)
 
     def __iter__(self):
-        """ __iter__ function """
+        """__iter__ function"""
         for i in range(len(self.buffer)):
             yield (self.buffer[i])
 
-    def run(self):
-        """ run the program on the given machine """
-        if self.machine is None:
-            raise Exception("No machine to run on")
-        self.machine.run(self)
 
 numeric_types = (
     int,
@@ -121,7 +111,7 @@ numeric_types = (
 
 
 def cmd_factory(cmd, doc=None):
-    """ Factory to create GCode Command Functions. """
+    """Factory to create GCode Command Functions."""
 
     def cmd_fcn(self, **kwargs):
         f""" {cmd}:"""

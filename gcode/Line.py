@@ -80,7 +80,7 @@ class Line(GCode):
 
     @property
     def dists(self):
-        """ Distances traveled in each line segment """
+        """Distances traveled in each line segment"""
         # For remaining points.
         dist_ = list()
         # Look through each of the points in the shape.
@@ -94,21 +94,21 @@ class Line(GCode):
 
     @property
     def dist(self):
-        """ Total distance traveled. """
+        """Total distance traveled."""
         """ Return the distance traveled """
         return np.round(np.sum(self.dists), 5)
 
     @property
     def times(self):
-        """ Amount of time spent drawing each line spegment.
+        """Amount of time spent drawing each line spegment.
 
-        Does not take into consideration acceleration curves """
+        Does not take into consideration acceleration curves"""
         rate = self.feed / 60  # [mm/s]
         return [dist / rate for dist in self.dists]
 
     @property
     def time(self):
-        """ Total distance traveled. """
+        """Total distance traveled."""
         return np.round(np.sum(self.times), 5)
 
     def generate_gcode(self):

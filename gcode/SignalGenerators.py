@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
+from typing import Union
+
 import numpy as np
 import scipy as sp
 
 
-import numpy as np
-from typing import Union
-
-def sine(t: Union[float, np.ndarray], A: float = 1, f: float = 1, phi: float = 0, D: float = 0) -> Union[float, np.ndarray]:
+def sine(
+    t: Union[float, np.ndarray],
+    A: float = 1,
+    f: float = 1,
+    phi: float = 0,
+    D: float = 0,
+) -> Union[float, np.ndarray]:
     """
     Compute the sine wave.
 
@@ -30,7 +35,14 @@ def sine(t: Union[float, np.ndarray], A: float = 1, f: float = 1, phi: float = 0
     """
     return A * np.sin(2 * np.pi * f * t + phi) + D
 
-def cosine(t: Union[float, np.ndarray], A: float = 1, f: float = 1, phi: float = 0, D: float = 0) -> Union[float, np.ndarray]:
+
+def cosine(
+    t: Union[float, np.ndarray],
+    A: float = 1,
+    f: float = 1,
+    phi: float = 0,
+    D: float = 0,
+) -> Union[float, np.ndarray]:
     """
     Compute the cosine wave.
 
@@ -54,6 +66,7 @@ def cosine(t: Union[float, np.ndarray], A: float = 1, f: float = 1, phi: float =
     """
     return A * np.cos(2 * np.pi * f * t + phi) + D
 
+
 def square(t, A=1, f=1, phi=0, D=0):
     """
     t: time
@@ -61,7 +74,7 @@ def square(t, A=1, f=1, phi=0, D=0):
     f: the ordinary frequency, the number of oscillations (cycles) that occur each second of time.
     D: non-zero center amplitude
     """
-    square_ = A * sp.signal.square(2 * np.pi * f * t+phi) + D
+    square_ = A * sp.signal.square(2 * np.pi * f * t + phi) + D
     return square_
 
 
