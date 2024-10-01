@@ -88,7 +88,7 @@ class GCode:
             buffer2 = other.buffer
         else:
             raise Exception(f"{type(other)}:\n{other}")
-        return GCode(machine=self.machine, buffer=self.buffer + buffer2)
+        return GCode(buffer=self.buffer + buffer2)
 
     def __iter__(self):
         """__iter__ function"""
