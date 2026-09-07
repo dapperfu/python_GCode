@@ -1,5 +1,4 @@
 from . import Shapes
-from ._version import get_versions
 from .GCode import GCode
 from .Line import hline
 from .Line import Line
@@ -10,7 +9,7 @@ from .SignalGenerators import sine
 from .SignalGenerators import square
 from .SignalGenerators import triangle
 
-__version__ = get_versions()["version"]
+__version__ = "0.1.0"
 __all__ = [
     "__version__",
     "Gcode",
@@ -23,5 +22,3 @@ __all__ = [
     "sawtooth",
     "triangle",
 ]
-
-del get_versions

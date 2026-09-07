@@ -25,7 +25,7 @@ requirements = read_requirements()
 test_requirements = read_requirements(path="requirements_test.txt")
 
 setuptools.setup(
-    version="0.0.24",
+    version="0.1.0",
     name="gcode",
     description="GCode",
     author="Jed",
